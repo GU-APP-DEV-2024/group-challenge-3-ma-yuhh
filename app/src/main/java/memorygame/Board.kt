@@ -4,57 +4,29 @@ class Board( ) {
     //Constructor to create board of different sizes.
     // Assign
     private val cards: Array<Card> = Array<Card>(6) {_ -> Card(' ', "")}
+    private val suits: Array<Char> = arrayOf('c', 'd', 'h', 's')
+    private val vals: Array<String> = arrayOf("2", "3", "4", "5", "6", "7", "8", "9", "10", "'j", "q", "k", "a")
+
     init {
         val numCards = 6
         for(index in 0 until numCards / 2) {
-            val randSuit = (0 .. 3).random()
-            val randNum = (2..14).random()
-            var suit = 'x'
-            when (randSuit) {
-                0 -> {
-                    suit = 'c'
-                }
-                1 -> {
-                    suit = 'd'
-                }
-                2 -> {
-                    suit = 'h'
-                }
-                3 -> {
-                    suit = 's'
-                }
-            }
-            val num: String = when (randNum) {
-                11 -> {
-                    "j"
-                }
-
-                12 -> {
-                    "q"
-                }
-
-                13 -> {
-                    "k"
-                }
-
-                14 -> {
-                    "a"
-                }
-
-                else -> randNum.toString()
-            }
             var randIndex1 = (0 until numCards).random()
+
+            val currCardSuit = suits.random()
+            val currCardVal = vals.random()
+
             while (cards[randIndex1] != Card(' ', "")) {
                 randIndex1 = (0 until numCards).random()
             }
-            cards[randIndex1] = Card(suit, num)
+
+            cards[randIndex1] = Card(currCardSuit, currCardVal)
 
             // Find second empty spot
             var randIndex2 = (0 until numCards).random()
             while (cards[randIndex2] != Card(' ', "")) {
                 randIndex2 = (0 until numCards).random()
             }
-            cards[randIndex2] = Card(suit, num)
+            cards[randIndex2] = Card(currCardSuit, currCardVal)
         }
     }
 
